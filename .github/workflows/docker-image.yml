@@ -12,7 +12,7 @@ jobs:
     - uses: actions/checkout@v3
 
     - name: Clone repository
-      run: git clone https://github.com/username/repository.git /app
+      run: git clone https://github.com/kjeevesh/pipelines_test /app
 
     - name: Build the Docker image
       run: |
