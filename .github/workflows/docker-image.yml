@@ -14,8 +14,11 @@ jobs:
     - name: Clone repository
       run: git clone https://github.com/kjeevesh/pipelines_test 
     - name: Build the Docker image
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_HUB_TOKEN }}
       run: |
-        echo ${{ secrets.DOCKER_HUB_TOKEN }} | docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} --password-stdin docker.io
-        docker build . --file Dockerfile --tag docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.DOCKER_HUB_REPOSITORY }}:$GITHUB_SHA
-        docker push docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.DOCKER_HUB_REPOSITORY }}:$GITHUB_SHA
+        echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin docker.io
+        docker build . --file Dockerfile --tag docker.io/${DOCKER_USERNAME}/${{ secrets.DOCKER_HUB_REPOSITORY }}:$GITHUB_SHA
+        docker push docker.io/${DOCKER_USERNAME}/${{ secrets.DOCKER_HUB_REPOSITORY }}:$GITHUB_SHA
 
