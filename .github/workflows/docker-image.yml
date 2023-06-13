@@ -39,7 +39,7 @@ jobs:
         password: ${{ secrets.DCOKER_HUB_TOKEN }}
 
     - name: Pull Docker Image
-      run: docker pull docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.DCOKER_HUB_REPOSITORY }}:latest
+      run: docker pull docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.DCOKER_HUB_REPOSITORY }}:$GITHUB_SHA
 
     - name: Deploy to Azure VM
       uses: azure/login@v1
