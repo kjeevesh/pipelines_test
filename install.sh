@@ -1,7 +1,7 @@
 #!/bin/bash
 
 set -e
-
+ 
 # Update and install required dependencies
 apt-get update
 apt-get install -y wget curl gnupg2 software-properties-common apt-transport-https ca-certificates lsb-release
