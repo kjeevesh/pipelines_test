@@ -37,11 +37,8 @@ jobs:
       with:
         username: ${{ secrets.DOCKER_HUB_USERNAME }}
         password: ${{ secrets.DCOKER_HUB_TOKEN }}
-
-    - name: Pull Docker Image
-      run: docker pull docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.DCOKER_HUB_REPOSITORY }}:$GITHUB_SHA
     - name: Connect to Azure VM
       run: |
           sudo apt-get install -y sshpass
-          sshpass -p ${{ secrets.VM_PASSWORD }} ssh -o StrictHostKeyChecking=no ${{ secrets.VM_USERNAME }}@104.43.89.202 "docker pull docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.DCOKER_HUB_REPOSITORY }}:$GITHUB_SHA && docker pull kjeevesh/pipeline_test1:latest && docker images"
+          sshpass -p ${{ secrets.VM_PASSWORD }} ssh -o StrictHostKeyChecking=no ${{ secrets.VM_USERNAME }}@104.43.89.202 "sudo docker pull docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.DCOKER_HUB_REPOSITORY }}:$GITHUB_SHA && sudo docker pull kjeevesh/pipeline_test1:latest && sudo docker images"
 
