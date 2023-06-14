@@ -2,7 +2,7 @@ FROM ubuntu:22.04
 
 # Update and install required dependencies
 RUN apt-get update && \
-    apt-get install -y curl gnupg
+    apt-get install -y curl gnupg 
 
 # Import MongoDB public GPG key
 RUN curl -fsSL https://www.mongodb.org/static/pgp/server-4.4.asc | gpg --dearmor --output /etc/apt/trusted.gpg.d/mongodb.gpg
