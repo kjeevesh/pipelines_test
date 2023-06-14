@@ -40,12 +40,8 @@ jobs:
 
     - name: Pull Docker Image
       run: docker pull docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.DCOKER_HUB_REPOSITORY }}:$GITHUB_SHA
-
-    - name: Deploy to Azure VM
-      uses: azure/login@v1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-    - name: Run Docker Container on Azure VM
+    - name: Connect to Azure VM
       run: |
-        az vm run-command invoke -g <resource_group> -n <vm_name> --command-id RunShellScript --scripts "docker run -d -p 80:80 docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.DCOKER_HUB_REPOSITORY }}:$GITHUB_SHA"
+          sudo apt-get install -y sshpass
+          sshpass -p ${{ secrets.VM_PASSWORD }} ssh -o StrictHostKeyChecking=no ${{ secrets.VM_USERNAME }}@104.43.89.202 "echo 'Hello, Azure VM!'"
+
