@@ -40,5 +40,5 @@ jobs:
     - name: Connect to Azure VM
       run: |
           sudo apt-get install -y sshpass
-          sshpass -p ${{ secrets.VM_PASSWORD }} ssh -o StrictHostKeyChecking=no ${{ secrets.VM_USERNAME }}@104.43.89.202 "sudo docker pull docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.DCOKER_HUB_REPOSITORY }}:$GITHUB_SHA && sudo docker pull kjeevesh/pipeline_test1:latest && sudo docker images"
+          sshpass -p ${{ secrets.VM_PASSWORD }} ssh -o StrictHostKeyChecking=no ${{ secrets.VM_USERNAME }}@104.43.89.202 "sudo docker pull docker.io/${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.DCOKER_HUB_REPOSITORY }}:$GITHUB_SHA && sudo docker pull kjeevesh/pipeline_test1:latest && sudo docker images && sudo docker run -it kjeevesh/pipeline_test1:latest && sudo docker run ${{ secrets.DOCKER_HUB_USERNAME }}/${{ secrets.DCOKER_HUB_REPOSITORY }}:$GITHUB_SHA && sudo docker ps -a"
 
